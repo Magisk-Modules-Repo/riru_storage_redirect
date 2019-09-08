@@ -146,7 +146,7 @@ check_architecture() {
 check_app_version() {
   VERSION=$(cat "$CONFIG_PATH/.server_version")
   ui_print "- Storage Redirect core service version: $VERSION"
-  [[ "$VERSION" -ge 219 ]] || abort "! Please upgrade Storage Redirect app to v1.8.2 or above, you can find download from https://sr.rikka.app"
+  [[ "$VERSION" -ge 222 ]] || abort "! Please upgrade Storage Redirect app to v1.9.0 or above (and run core service in app), you can find download from https://sr.rikka.app"
 }
 
 on_install() {

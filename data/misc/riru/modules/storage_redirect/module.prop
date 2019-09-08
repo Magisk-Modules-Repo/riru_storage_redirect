@@ -1,6 +1,0 @@
-name=Storage Redirect (Enhanced mode)
-version=v19.7
-versionCode=27
-author=Rikka
-description=Enable Enhanced mode for Storage Redirect. Storage Redirect is an app which an provides isolated storage feature for apps.
-api=4

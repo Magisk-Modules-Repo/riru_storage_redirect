@@ -1,6 +1,6 @@
 id=riru_storage_redirect
 name=Riru - Storage Redirect (Enhanced mode)
-version=v19.7
-versionCode=27
+version=v20.0
+versionCode=29
 author=Rikka
-description=Enable Enhanced mode for Storage Redirect. Storage Redirect is an app which an provides isolated storage feature for apps. Requires Riru - Core v18 or above installed.
+description=Enable Enhanced mode for Storage Redirect. Storage Redirect is an app which provides app storage isolation feature. Requires Riru - Core v19 or above installed.
