@@ -8,6 +8,11 @@ You can learn more about Storage Redirect from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v20.1 (30)
+
+- Don't hardcode `HIDDEN_API_ENFORCEMENT_POLICY_MASK` value
+- Fix log is printed in zygote process
+
 ### v20.0 (29)
 
 - Fix the problem that redirection not work for apps installed in external storage card when using [Adoptable Storage](https://source.android.com/devices/storage/adoptable)
