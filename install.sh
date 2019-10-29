@@ -160,15 +160,18 @@ on_install() {
   check_architecture
   check_riru_version
   check_app_version
+  
+  unzip -o "$ZIPFILE" 'verify.sh' -d $TMPDIR >&2
+  . $TMPDIR/verify.sh
 
   if [[ "$ARCH" == "x86" || "$ARCH" == "x64" ]]; then
     ui_print "- Extracting x86/64 libraries"
-	unzip -o "$ZIPFILE" 'system_x86/*' -d $MODPATH >&2
+	vunzip -o "$ZIPFILE" 'system_x86/*' -d $MODPATH
     mv "$MODPATH/system_x86/lib" "$MODPATH/system/lib"
     mv "$MODPATH/system_x86/lib64" "$MODPATH/system/lib64"
   else
     ui_print "- Extracting arm/arm64 libraries"
-    unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
+    vunzip -o "$ZIPFILE" 'system/*' -d $MODPATH
   fi
 
   if [[ "$IS64BIT" = false ]]; then
@@ -177,7 +180,7 @@ on_install() {
   fi
 
   ui_print "- Extracting extra files"
-  unzip -o "$ZIPFILE" 'data/*' -d "$TMPDIR" >&2
+  vunzip -o "$ZIPFILE" 'data/*' -d "$TMPDIR"
 
   TARGET="$RIRU_PATH/modules"
 
@@ -186,7 +189,7 @@ on_install() {
 
   ui_print "- Extracting starter"
   mkdir -p "$RIRU_PATH/modules/storage_redirect/bin"
-  unzip -j "$ZIPFILE" "starter_$ARCH" -d "$RIRU_PATH/modules/storage_redirect/bin" >&2
+  vunzip -j "$ZIPFILE" "starter_$ARCH" -d "$RIRU_PATH/modules/storage_redirect/bin"
   mv "$RIRU_PATH/modules/storage_redirect/bin/starter_$ARCH" "$RIRU_PATH/modules/storage_redirect/bin/starter"
 
   ui_print "- Files copied"

@@ -8,6 +8,11 @@ You can learn more about Storage Redirect from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v20.3 (32)
+
+- Switch cgroup for starter
+- Verify important files on install
+
 ### v20.1 (30)
 
 - Don't hardcode `HIDDEN_API_ENFORCEMENT_POLICY_MASK` value
