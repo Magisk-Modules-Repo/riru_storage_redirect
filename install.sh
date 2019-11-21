@@ -146,10 +146,10 @@ check_architecture() {
 check_app_version() {
   VERSION=$(cat "$CONFIG_PATH/.server_version")
   ui_print "- Storage Redirect core service version: $VERSION"
-  if [[ "$VERSION" -lt 226 ]]; then
+  if [[ "$VERSION" -lt 232 ]]; then
     ui_print "*****************************************"
 	ui_print "! Storage Redirect app version too low"
-    ui_print "! Please upgrade to v2.0.0 or above (and run service)"
+    ui_print "! Please upgrade to v3.0.0 or above (and run service)"
     ui_print "! You can find download from https://sr.rikka.app"
 	ui_print "! For Google users, Google Play usually has hours to a day of delay"
 	abort    "*****************************************"

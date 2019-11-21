@@ -8,6 +8,10 @@ You can learn more about Storage Redirect from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v21.1 (34)
+
+- Add "Block system remount" option
+
 ### v20.3 (32)
 
 - Switch cgroup for starter
