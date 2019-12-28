@@ -8,6 +8,10 @@ You can learn more about Storage Redirect from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v21.1 (35) (2019-12-28)
+
+- Add custom sepolicy rule file for Magisk v20.2+ (20110+)
+
 ### v21.1 (34)
 
 - Add "Block system remount" option

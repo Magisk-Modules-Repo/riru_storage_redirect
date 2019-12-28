@@ -184,8 +184,10 @@ on_install() {
 
   TARGET="$RIRU_PATH/modules"
 
-   [[ -d "$TARGET" ]] || mkdir -p "$TARGET" || abort "! Can't mkdir -p $TARGET"
+  [[ -d "$TARGET" ]] || mkdir -p "$TARGET" || abort "! Can't mkdir -p $TARGET"
   cp -af "$TMPDIR$TARGET/." "$TARGET" || abort "! Can't cp -af $TMPDIR$TARGET/. $TARGET"
+
+  vunzip -o "$ZIPFILE" 'sepolicy.rule' -d "$MODPATH"
 
   ui_print "- Extracting starter"
   mkdir -p "$RIRU_PATH/modules/storage_redirect/bin"

@@ -1,0 +1,5 @@
+allow untrusted_app default_android_service service_manager find
+allow untrusted_app_27 default_android_service service_manager find
+allow untrusted_app_28 default_android_service service_manager find
+allow * magisk unix_dgram_socket *
+allow * magisk unix_stream_socket *
