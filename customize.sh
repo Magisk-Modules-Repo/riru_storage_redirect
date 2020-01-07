@@ -38,7 +38,7 @@ unzip -o "$ZIPFILE" 'verify.sh' -d $TMPDIR >&2
 . $TMPDIR/verify.sh
 
 ui_print "- Extracting module files"
-vunzip -o "$ZIPFILE" module.prop post-fs-data.sh -d "$MODPATH"
+vunzip -o "$ZIPFILE" 'module.prop' 'post-fs-data.sh' -d "$MODPATH"
 
 if [[ "$ARCH" == "x86" || "$ARCH" == "x64" ]]; then
   ui_print "- Extracting x86/64 libraries"
@@ -59,7 +59,7 @@ vunzip -o "$ZIPFILE" 'sepolicy.rule' -d "$MODPATH"
 
 ui_print "- Extracting starter"
 mkdir -p "$RIRU_PATH/modules/storage_redirect/bin"
-vunzip -j "$ZIPFILE" "starter_$ARCH" -d "$RIRU_PATH/modules/storage_redirect/bin"
+vunzip -o -j "$ZIPFILE" "starter/starter_$ARCH" -d "$RIRU_PATH/modules/storage_redirect/bin"
 mv "$RIRU_PATH/modules/storage_redirect/bin/starter_$ARCH" "$RIRU_PATH/modules/storage_redirect/bin/starter"
 
 ui_print "- Extracting Riru files"
