@@ -8,6 +8,11 @@ You can learn more about Storage Redirect from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v21.1 (36) (2020-1-7)
+
+- Add missing sepolicy rule for Samsung
+- Use customize.sh
+
 ### v21.1 (35) (2019-12-28)
 
 - Add custom sepolicy rule file for Magisk v20.2+ (20110+)
