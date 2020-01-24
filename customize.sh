@@ -1,73 +1,95 @@
 SKIPUNZIP=1
 RIRU_PATH="/data/misc/riru"
+RIRU_MODULE_ID="storage_redirect"
+RIRU_MODULE_PATH="$RIRU_PATH/modules/$RIRU_MODULE_ID"
 CONFIG_PATH="/data/misc/storage_redirect"
 
-check_riru_version() {
-  [[ ! -f "$RIRU_PATH/api_version" ]] && abort "! Please Install Riru - Core v19 or above"
-  VERSION=$(cat "$RIRU_PATH/api_version")
-  ui_print "- Riru API version: $VERSION"
-  [[ "$VERSION" -ge 4 ]] || abort "! Please upgrade Riru - Core to v19 or above"
-}
+# check architecture
+if [[ "$ARCH" != "arm" && "$ARCH" != "arm64" && "$ARCH" != "x86" && "$ARCH" != "x64" ]]; then
+  abort "! Unsupported platform: $ARCH"
+else
+  ui_print "- Device platform: $ARCH"
+fi
 
-check_architecture() {
-  if [[ "$ARCH" != "arm" && "$ARCH" != "arm64" && "$ARCH" != "x86" && "$ARCH" != "x64" ]]; then
-    abort "! Unsupported platform: $ARCH"
-  else
-    ui_print "- Device platform: $ARCH"
-  fi
-}
+# check Riru version
+if [[ ! -f "$RIRU_PATH/api_version" ]]; then
+  ui_print "*********************************************************"
+  ui_print "! 'Riru - Core' is not installed"
+  ui_print "! You can download from 'Magisk Manager' or https://github.com/RikkaApps/Riru/releases"
+  abort "*********************************************************"
+fi
+RIRU_API_VERSION=$(cat "$RIRU_PATH/api_version")
+ui_print "- Riru API version: $RIRU_API_VERSION"
+if [[ "$RIRU_API_VERSION" -lt 4 ]]; then
+  ui_print "*********************************************************"
+  ui_print "! The latest version of 'Riru - Core' is required"
+  ui_print "! You can download from 'Magisk Manager' or https://github.com/RikkaApps/Riru/releases"
+  abort "*********************************************************"
+fi
 
-check_app_version() {
-  VERSION=$(cat "$CONFIG_PATH/.server_version")
-  ui_print "- Storage Redirect core service version: $VERSION"
-  if [[ "$VERSION" -lt 232 ]]; then
-    ui_print "*****************************************"
-	ui_print "! Storage Redirect app version too low"
-    ui_print "! Please upgrade to v3.0.0 or above (and run service)"
-    ui_print "! You can find download from https://sr.rikka.app"
-	ui_print "! For Google users, Google Play usually has hours to a day of delay"
-	abort    "*****************************************"
-  fi
-}
+# check app version
+VERSION=$(cat "$CONFIG_PATH/.server_version")
+ui_print "- Storage Redirect core service version: $VERSION"
+if [[ "$VERSION" -lt 232 ]]; then
+  ui_print "*****************************************"
+  ui_print "! Storage Redirect app version too low"
+  ui_print "! Please upgrade to v3.0.0 or above (and run service)"
+  ui_print "! You can find download from https://sr.rikka.app"
+  ui_print "! For Google users, Google Play usually has a few hours delay"
+  abort "*****************************************"
+fi
 
-check_architecture
-check_riru_version
-check_app_version
-
-unzip -o "$ZIPFILE" 'verify.sh' -d $TMPDIR >&2
+# extract verify.sh
+unzip -o "$ZIPFILE" 'verify.sh' -d "$TMPDIR" >&2
+if [[ ! -f "$TMPDIR/verify.sh" ]]; then
+  ui_print "*********************************************************"
+  ui_print "! Unable to extract verify.sh!"
+  ui_print "! This zip may be corrupted, please try downloading again"
+  abort "*********************************************************"
+fi
 . $TMPDIR/verify.sh
 
-ui_print "- Extracting module files"
-vunzip -o "$ZIPFILE" 'module.prop' 'post-fs-data.sh' -d "$MODPATH"
+ui_print "- Extracting Magisk files"
+
+extract "$ZIPFILE" 'module.prop' "$MODPATH"
+extract "$ZIPFILE" 'post-fs-data.sh' "$MODPATH"
+extract "$ZIPFILE" 'uninstall.sh' "$MODPATH"
+extract "$ZIPFILE" 'sepolicy.rule' "$MODPATH"
 
 if [[ "$ARCH" == "x86" || "$ARCH" == "x64" ]]; then
-  ui_print "- Extracting x86/64 libraries"
-  vunzip -o "$ZIPFILE" 'system_x86/*' -d $MODPATH
+  ui_print "- Extracting x86 libraries"
+  extract "$ZIPFILE" "system_x86/lib/libriru_$RIRU_MODULE_ID.so" "$MODPATH"
   mv "$MODPATH/system_x86/lib" "$MODPATH/system/lib"
-  mv "$MODPATH/system_x86/lib64" "$MODPATH/system/lib64"
+
+  if [[ "$IS64BIT" == "true" ]]; then
+    ui_print "- Extracting x64 libraries"
+    extract "$ZIPFILE" "system_x86/lib64/libriru_$RIRU_MODULE_ID.so" "$MODPATH"
+    mv "$MODPATH/system_x86/lib64" "$MODPATH/system/lib64"
+  fi
 else
-  ui_print "- Extracting arm/arm64 libraries"
-  vunzip -o "$ZIPFILE" 'system/*' -d $MODPATH
+  ui_print "- Extracting arm libraries"
+  extract "$ZIPFILE" "system/lib/libriru_$RIRU_MODULE_ID.so" "$MODPATH"
+
+  if [[ "$IS64BIT" == "true" ]]; then
+    ui_print "- Extracting arm64 libraries"
+    extract "$ZIPFILE" "system/lib64/libriru_$RIRU_MODULE_ID.so" "$MODPATH"
+  fi
 fi
 
-if [[ "$IS64BIT" = false ]]; then
-  ui_print "- Removing 64-bit libraries"
-  rm -rf "$MODPATH/system/lib64"
-fi
-
-vunzip -o "$ZIPFILE" 'sepolicy.rule' -d "$MODPATH"
+# Riru files
+ui_print "- Extracting extra files"
+extract "$ZIPFILE" 'riru/module.prop.new' "$TMPDIR"
+[[ -d "$RIRU_MODULE_PATH" ]] || mkdir -p "$RIRU_MODULE_PATH" || abort "! Can't mkdir -p $RIRU_MODULE_PATH"
+rm -f "$RIRU_MODULE_PATH/module.prop.new"
+mv "$TMPDIR/riru/module.prop.new" "$RIRU_MODULE_PATH/module.prop.new" || abort "! Can't mv $TMPDIR/riru/module.prop.new $RIRU_MODULE_PATH/module.prop.new"
 
 ui_print "- Extracting starter"
-mkdir -p "$RIRU_PATH/modules/storage_redirect/bin"
-vunzip -o -j "$ZIPFILE" "starter/starter_$ARCH" -d "$RIRU_PATH/modules/storage_redirect/bin"
-mv "$RIRU_PATH/modules/storage_redirect/bin/starter_$ARCH" "$RIRU_PATH/modules/storage_redirect/bin/starter"
+mkdir -p "$RIRU_MODULE_PATH/bin"
+extract "$ZIPFILE" "starter/starter_$ARCH" "$RIRU_MODULE_PATH/bin" "true"
+mv "$RIRU_MODULE_PATH/bin/starter_$ARCH" "$RIRU_MODULE_PATH/bin/starter"
 
-ui_print "- Extracting Riru files"
-vunzip -o "$ZIPFILE" 'data/*' -d "$TMPDIR"
-TARGET="$RIRU_PATH/modules"
-[[ -d "$TARGET" ]] || mkdir -p "$TARGET" || abort "! Can't mkdir -p $TARGET"
-cp -af "$TMPDIR$TARGET/." "$TARGET" || abort "! Can't cp -af $TMPDIR$TARGET/. $TARGET"
-
+# set permissions
 ui_print "- Setting permissions"
-set_perm_recursive $MODPATH 0 0 0755 0644
-set_perm "$RIRU_PATH/modules/storage_redirect/bin/starter" 0 0 0700 u:object_r:system_file:s0
+set_perm_recursive "$MODPATH" 0 0 0755 0644
+set_perm_recursive "$RIRU_MODULE_PATH" 0 0 0700 0600
+set_perm "$RIRU_MODULE_PATH/bin/starter" 0 0 0700
