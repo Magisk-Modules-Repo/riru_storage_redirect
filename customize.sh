@@ -89,7 +89,7 @@ set_perm "$RIRU_MODULE_PATH/bin" 0 0 0700
 
 rm -f "$RIRU_MODULE_PATH/module.prop.new"
 extract "$ZIPFILE" 'riru/module.prop.new' "$RIRU_MODULE_PATH" true
-set_perm "$$RIRU_MODULE_PATH/module.prop.new" 0 0 0600
+set_perm "$RIRU_MODULE_PATH/module.prop.new" 0 0 0600
 
 extract "$ZIPFILE" "starter/starter_$ARCH" "$RIRU_MODULE_PATH/bin" true
 mv "$RIRU_MODULE_PATH/bin/starter_$ARCH" "$RIRU_MODULE_PATH/bin/starter"
