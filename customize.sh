@@ -20,13 +20,13 @@ check_riru_version
 check_architecture
 
 # check app version
-[ -f "$CONFIG_PATH/.server_version" ] && VERSION=$(cat "$CONFIG_PATH/.server_version")
+[ -f "$CONFIG_PATH/.server_version" ] && VERSION=$(cat "$CONFIG_PATH/.server_version") || VERSION=0
 [ "$VERSION" -eq "$VERSION" ] || VERSION=0
 ui_print "- Storage Redirect core service version: $VERSION"
-if [ "$VERSION" -lt 232 ]; then
+if [ "$VERSION" -lt 248 ]; then
   ui_print    "*****************************************"
   ui_print    "! Storage Redirect app version is too low"
-  ui_print    "! Please upgrade the app to v3.0.0 or above (and run service)"
+  ui_print    "! Please upgrade the app to v4.1.0 or above (and run service)"
   ui_print    "! You can find download from https://sr.rikka.app"
   ui_print    "! For Google users, Google Play usually has a few hours delay"
   abort_clean "*****************************************"
