@@ -8,12 +8,16 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
-### v22.0 (37) (2020-2-28)
+### v22.1 (38) (2020-03-08)
+
+- Fix service "not starting" on some devices
+
+### v22.0 (37) (2020-02-28)
 
 - Adapt changes for "Shared User ID" support
 - Adapt changes for "fix isolate early started apps may cause system not starting"
 
-### v21.1 (36) (2020-1-7)
+### v21.1 (36) (2020-01-7)
 
 - Add missing sepolicy rule for Samsung
 - Use customize.sh

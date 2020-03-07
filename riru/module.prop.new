@@ -1,6 +1,6 @@
 name=Enhanced mode for Storage Isolation (Storage Redirect)
-version=v22.0
-versionCode=37
+version=v22.1
+versionCode=38
 author=Rikka
 description=Enable Enhanced mode for Storage Isolation (Storage Redirect) app. Storage Isolation is an app provides app storage isolation feature.
 api=4
