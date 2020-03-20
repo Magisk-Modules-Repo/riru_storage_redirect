@@ -8,6 +8,10 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v22.3 (40) (2020-03-20)
+
+- Fix service not starting on some devices (on these devices symlink in `/data/misc` will broken after reboot)
+
 ### v22.2 (39) (2020-03-16)
 
 - Fix service not starting in rare cases
