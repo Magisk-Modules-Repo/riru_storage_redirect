@@ -8,9 +8,16 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v22.4 (41) (2020-04-25)
+
+- Add `untrusted_app_29` in `sepolicy.rule`
+- Upgrade to Riru v20
+
 ### v22.3 (40) (2020-03-20)
 
-- Fix service not starting on some devices (on these devices symlink in `/data/misc` will broken after reboot)
+- Fix service not starting on some devices
+
+  On these devices (yeah, it's you, Xiaomi, again and again) symlinks in `/data/misc` breaks after reboot
 
 ### v22.2 (39) (2020-03-16)
 

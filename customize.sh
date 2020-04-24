@@ -25,10 +25,9 @@ check_architecture
 ui_print "- Storage Redirect core service version: $VERSION"
 if [ "$VERSION" -lt 248 ]; then
   ui_print    "*****************************************"
-  ui_print    "! Storage Redirect app version is too low"
-  ui_print    "! Please upgrade the app to v4.1.0 or above (and run service)"
+  ui_print    "! The version of Storage Isolation app is too low"
+  ui_print    "! Please upgrade the app to v4.1.0 or above and upgrade core service in the app"
   ui_print    "! You can find download from https://sr.rikka.app"
-  ui_print    "! For Google users, Google Play usually has a few hours delay"
   abort_clean "*****************************************"
 fi
 

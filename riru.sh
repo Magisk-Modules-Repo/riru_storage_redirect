@@ -2,7 +2,7 @@
 RIRU_PATH="/data/misc/riru"
 RIRU_MODULE_ID="storage_redirect"
 RIRU_MODULE_PATH="$RIRU_PATH/modules/$RIRU_MODULE_ID"
-RIRU_MIN_API_VERSION=4
+RIRU_MIN_API_VERSION=5
 
 abort_clean() {
   rm -rf "$MODPATH"
