@@ -8,10 +8,14 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v22.5 (42) (2020-04-25)
+
+- Upgrade to Riru API 6 (because Android 11 DP3 changes again)
+
 ### v22.4 (41) (2020-04-25)
 
 - Add `untrusted_app_29` in `sepolicy.rule`
-- Upgrade to Riru v20
+- Upgrade to Riru API 5
 
 ### v22.3 (40) (2020-03-20)
 
