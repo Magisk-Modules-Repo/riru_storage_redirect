@@ -22,10 +22,10 @@ check_architecture
 # check app version
 [ -f "$CONFIG_PATH/.server_version" ] && VERSION=$(cat "$CONFIG_PATH/.server_version") || VERSION=0
 [ "$VERSION" -eq "$VERSION" ] || VERSION=0
-ui_print "- Storage Redirect core service version: $VERSION"
+ui_print "- Storage Isolation core service version: $VERSION"
 if [ "$VERSION" -lt 248 ]; then
   ui_print    "*****************************************"
-  ui_print    "! The version of Storage Isolation app is too low"
+  ui_print    "! Storage Isolation app is not installed or the verison too low"
   ui_print    "! Please upgrade the app to v4.1.0 or above and upgrade core service in the app"
   ui_print    "! You can find download from https://sr.rikka.app"
   abort_clean "*****************************************"

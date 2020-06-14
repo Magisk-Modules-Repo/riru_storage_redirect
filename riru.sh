@@ -3,7 +3,7 @@ RIRU_PATH="/data/misc/riru"
 RIRU_MODULE_ID="storage_redirect"
 RIRU_MODULE_PATH="$RIRU_PATH/modules/$RIRU_MODULE_ID"
 RIRU_MIN_API_VERSION=6
-RIRU_MIN_RIRU_VERSION_NAME=v21.0
+RIRU_MIN_VERSION_NAME="v21.0"
 
 abort_clean() {
   rm -rf "$MODPATH"
@@ -22,7 +22,7 @@ check_riru_version() {
   ui_print "- Riru API version: $RIRU_API_VERSION"
   if [ "$RIRU_API_VERSION" -lt $RIRU_MIN_API_VERSION ]; then
     ui_print    "*********************************************************"
-    ui_print    "! Riru $RIRU_MIN_RIRU_VERSION_NAME or above is required"
+    ui_print    "! Riru $RIRU_MIN_VERSION_NAME or above is required"
     ui_print    "! Please upgrade Riru from Magisk Manager or https://github.com/RikkaApps/Riru/releases"
     abort_clean "*********************************************************"
   fi

@@ -1,12 +1,16 @@
-# Riru - Enhanced mode for Storage Isolation (Storage Redirect)
+# Riru - Enhanced mode for Storage Isolation
 
-Storage Isolation (Storage Redirect) is an app which provides isolated storage feature for apps. It can prevent poor-designed apps making your storage messy and let you control files app can access.
+Storage Isolation is an app which provides isolated storage feature for apps. It can prevent poor-designed apps making your storage messy and let you control files app can access.
 
 This module enables Enhanced mode for Storage Isolation app which includes some important features related to user experience.
 
 You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
+
+### v22.6 (43) (2020-06-14)
+
+- Fix app-level toggle of "Fix app interaction" not work
 
 ### v22.5 (42) (2020-04-25)
 
