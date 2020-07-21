@@ -1,6 +1,6 @@
 name=Enhanced mode for Storage Isolation
-version=v22.6
-versionCode=43
+version=v22.7
+versionCode=44
 author=Rikka
 description=Enable Enhanced mode for Storage Isolation app. Storage Isolation is an app provides app storage isolation feature.
 api=6

@@ -8,6 +8,10 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v22.7 (44) (2020-06-16)
+
+- Change mount mode to `MOUNT_EXTERNAL_DEFAULT` for isolated apps
+
 ### v22.6 (43) (2020-06-14)
 
 - Fix app-level toggle of "Fix app interaction" not work
