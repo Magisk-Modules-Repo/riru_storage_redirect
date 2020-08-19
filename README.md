@@ -8,6 +8,10 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v22.8 (45) (2020-08-11)
+
+- Revert changes of v22.7 (because this will cause problem on devices with external SD card or highly modified system like MIUI, OxygenOS)
+
 ### v22.7 (44) (2020-06-16)
 
 - Change mount mode to `MOUNT_EXTERNAL_DEFAULT` for isolated apps
