@@ -1,5 +1,5 @@
 SKIPUNZIP=1
-CONFIG_PATH="/data/misc/storage_redirect"
+CONFIG_PATH="/data/adb/storage-isolation"
 
 # extract verify.sh
 ui_print "- Extracting verify.sh"
@@ -8,7 +8,7 @@ if [ ! -f "$TMPDIR/verify.sh" ]; then
   ui_print    "*********************************************************"
   ui_print    "! Unable to extract verify.sh!"
   ui_print    "! This zip may be corrupted, please try downloading again"
-  abort_clean "*********************************************************"
+  abort "*********************************************************"
 fi
 . $TMPDIR/verify.sh
 
@@ -23,12 +23,12 @@ check_architecture
 [ -f "$CONFIG_PATH/.server_version" ] && VERSION=$(cat "$CONFIG_PATH/.server_version") || VERSION=0
 [ "$VERSION" -eq "$VERSION" ] || VERSION=0
 ui_print "- Storage Isolation core service version: $VERSION"
-if [ "$VERSION" -lt 248 ]; then
+if [ "$VERSION" -lt 274 ]; then
   ui_print    "*****************************************"
   ui_print    "! Storage Isolation app is not installed or the verison too low"
-  ui_print    "! Please upgrade the app to v4.1.0 or above and upgrade core service in the app"
+  ui_print    "! Please upgrade the app to v5.0.0 or above and upgrade core service in the app"
   ui_print    "! You can find download from https://sr.rikka.app"
-  abort_clean "*****************************************"
+  abort "*****************************************"
 fi
 
 ui_print "- Extracting Magisk files"
@@ -36,12 +36,11 @@ ui_print "- Extracting Magisk files"
 extract "$ZIPFILE" 'module.prop' "$MODPATH"
 extract "$ZIPFILE" 'post-fs-data.sh' "$MODPATH"
 extract "$ZIPFILE" 'uninstall.sh' "$MODPATH"
-extract "$ZIPFILE" 'sepolicy.rule' "$MODPATH"
 
 if [ "$ARCH" = "x86" ] || [ "$ARCH" = "x64" ]; then
   ui_print "- Extracting x86 libraries"
   extract "$ZIPFILE" "system_x86/lib/libriru_$RIRU_MODULE_ID.so" "$MODPATH"
-  mv "$MODPATH/system_x86/lib" "$MODPATH/system/lib"
+  mv "$MODPATH/system_x86" "$MODPATH/system"
 
   if [ "$IS64BIT" = true ]; then
     ui_print "- Extracting x64 libraries"
@@ -58,25 +57,17 @@ else
   fi
 fi
 
+set_perm_recursive "$MODPATH" 0 0 0755 0644
+
 # Riru files
 ui_print "- Extracting extra files"
-[ -d "$RIRU_MODULE_PATH" ] || mkdir -p "$RIRU_MODULE_PATH" || abort_clean "! Can't create $RIRU_MODULE_PATH"
-[ -d "$RIRU_MODULE_PATH/bin" ] || mkdir -p "$RIRU_MODULE_PATH/bin" || abort_clean "! Can't create $RIRU_MODULE_PATH/bin"
-
-# set permission just in case
-set_perm "$RIRU_PATH" 0 0 0700
-set_perm "$RIRU_PATH/modules" 0 0 0700
-set_perm "$RIRU_MODULE_PATH" 0 0 0700
-set_perm "$RIRU_MODULE_PATH/bin" 0 0 0700
+[ -d "$RIRU_MODULE_PATH" ] || mkdir -p "$RIRU_MODULE_PATH" || abort "! Can't create $RIRU_MODULE_PATH"
+[ -d "$RIRU_MODULE_PATH/bin" ] || mkdir -p "$RIRU_MODULE_PATH/bin" || abort "! Can't create $RIRU_MODULE_PATH/bin"
 
 rm -f "$RIRU_MODULE_PATH/module.prop.new"
 extract "$ZIPFILE" 'riru/module.prop.new' "$RIRU_MODULE_PATH" true
-set_perm "$RIRU_MODULE_PATH/module.prop.new" 0 0 0600
+set_perm "$RIRU_MODULE_PATH/module.prop.new" 0 0 0600 $RIRU_SECONTEXT
 
 extract "$ZIPFILE" "starter/starter_$ARCH" "$RIRU_MODULE_PATH/bin" true
 mv "$RIRU_MODULE_PATH/bin/starter_$ARCH" "$RIRU_MODULE_PATH/bin/starter"
-set_perm "$RIRU_MODULE_PATH/bin/starter" 0 0 0700
-
-# set permissions
-ui_print "- Setting permissions"
-set_perm_recursive "$MODPATH" 0 0 0755 0644
+set_perm "$RIRU_MODULE_PATH/bin/starter" 0 0 0700 $RIRU_SECONTEXT

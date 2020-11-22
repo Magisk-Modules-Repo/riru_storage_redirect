@@ -8,6 +8,11 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v23.0-beta01 (48) (2020-11-05)
+
+- Use binder for all IPC involving `untrusted_app` domain, SELinux policy patch is not required anymore 🎉 (For the module itself, everything are completely rewritten)
+- Adapt Riru v22
+
 ### v22.8 (45) (2020-08-11)
 
 - Revert changes of v22.7 (because this will cause problem on devices with external SD card or highly modified system like MIUI, OxygenOS)
@@ -48,7 +53,7 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 - Adapt changes for "Shared User ID" support
 - Adapt changes for "fix isolate early started apps may cause system not starting"
 
-### v21.1 (36) (2020-01-7)
+### v21.1 (36) (2020-01-07)
 
 - Add missing sepolicy rule for Samsung
 - Use customize.sh
