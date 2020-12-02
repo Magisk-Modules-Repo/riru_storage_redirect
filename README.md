@@ -8,7 +8,11 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
-### v23.0-beta01 (48) (2020-11-05)
+### v23.1 (51) (2020-12-03)
+
+- Try to read files with "rirud" (added from Riru v22.x) first
+
+### v23.0 (48) (2020-11-05)
 
 - Use binder for all IPC involving `untrusted_app` domain, SELinux policy patch is not required anymore 🎉 (For the module itself, everything are completely rewritten)
 - Adapt Riru v22
