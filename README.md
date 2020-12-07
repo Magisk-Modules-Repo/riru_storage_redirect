@@ -8,9 +8,13 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v23.2 (52) (2020-12-07)
+
+- Works on pre-Android-8.0
+
 ### v23.1 (51) (2020-12-03)
 
-- Try to read files with "rirud" (added from Riru v22.x) first
+- Read files with "rirud" (added from Riru v22.x) first
 
 ### v23.0 (48) (2020-11-05)
 
