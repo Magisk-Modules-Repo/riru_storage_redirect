@@ -8,6 +8,14 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v23.3 (53) (2020-12-12)
+
+- Attempt to workaround the problem that the required changes are reverted by something else
+
+  If you have this problem, you will find Storage Isolation "stop working" at a random time (few minutes or few hours after booting).
+
+  **All reports are from Huawei users**. The new method works for Android 8+.
+
 ### v23.2 (52) (2020-12-07)
 
 - Works on pre-Android-8.0
