@@ -8,6 +8,10 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v23.4 (54) (2020-12-29)
+
+- Same from v23.3 but ensure it really works
+
 ### v23.3 (53) (2020-12-12)
 
 - Attempt to workaround the problem that the required changes are reverted by something else
