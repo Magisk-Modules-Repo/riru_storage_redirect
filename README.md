@@ -8,6 +8,11 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v23.6 (56) (2021-02-11)
+
+- Reduce file size
+- Fix an undefined behavior
+
 ### v23.5 (55) (2021-01-12)
 
 - Fix "Fix rename" can cause wrong behavior in some cases
