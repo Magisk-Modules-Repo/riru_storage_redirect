@@ -8,6 +8,19 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v23.8 (58) (2021-03-21)
+
+- Explicitly check child zygote
+
+Child zygote (`webview_zygote` and `app_zygote`) has no permission to use binder (this modules uses binder). Before only `mount_external != 0` is used for check, and child zygote do have `mount_external = 0` set, so there is no problem.
+
+However, recently there are two modules, `riru-unshare` and `Riru-IsolatedMagiskHider` that changes `mount_external` for `app_zygote`. So if you are using one of these modules with the older version of this module, it will finally cause the crash.
+
+### v23.7 (57) (2021-02-19)
+
+- Works on devices which has remove 32-bit support (Android 12 emulator and maybe new real devices in the future)
+- Reduce file size
+
 ### v23.6 (56) (2021-02-11)
 
 - Reduce file size
