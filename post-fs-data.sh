@@ -1,25 +1,21 @@
 #!/system/bin/sh
 MODDIR=${0%/*}
-DATADIR=/data/adb/storage-isolation
 
-[ ! -f "$MODDIR/riru.sh" ] && exit 1
-. $MODDIR/riru.sh
+if [ -f "$MODDIR"/../riru-core/util_functions.sh ]; then
+  # Riru v24
+  # If this module is installed before Riru is updated to v24, we have to manually move the files to the new location
+  [ -d "$MODDIR"/system ] && mv "$MODDIR"/system "$MODDIR"/riru
 
-# Use magisk_file like other Magisk files
-chcon $RIRU_SECONTEXT "$DATADIR"
-chcon $RIRU_SECONTEXT "$DATADIR/bin"
-chcon $RIRU_SECONTEXT "$DATADIR/bin/main.dex"
-chcon $RIRU_SECONTEXT "$DATADIR/bin/daemon"
-
-# Rename module.prop.new
-if [ -f "$RIRU_MODULE_PATH/module.prop.new" ]; then
-  rm "$RIRU_MODULE_PATH/module.prop"
-  mv "$RIRU_MODULE_PATH/module.prop.new" "$RIRU_MODULE_PATH/module.prop"
+  # Remove unnecessary foloder
+  rm -rf /data/misc/riru/modules/storage_redirect
+else
+  # Riru pre-v24
+  # In case user downgrade Riru to pre-v24
+  [ -d "$MODDIR"/riru ] && mv "$MODDIR"/riru "$MODDIR"/system
+  mkdir -p /data/misc/riru/modules/storage_redirect
 fi
 
-# Remove old file to avoid downgrade problems
-rm -rf /data/misc/riru/modules/storage_redirect
-
 # Run starter
-echo "storage-isolation: run $RIRU_MODULE_PATH/bin/starter" > /dev/kmsg
-exec "$RIRU_MODULE_PATH/bin/starter"
+chmod 700 "$MODDIR"/starter
+echo "storage-isolation: run $MODDIR/starter" > /dev/kmsg
+exec "$MODDIR/starter"

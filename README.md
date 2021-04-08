@@ -8,6 +8,14 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v24.1.0 (60) (2021-04-08)
+
+- Fix "Fix app interaction issues" not works after upgrading to Riru 25
+
+### v24.0.0 (59) (2021-03-23)
+
+- Changes for Riru 25
+
 ### v23.8 (58) (2021-03-21)
 
 - Explicitly check child zygote
