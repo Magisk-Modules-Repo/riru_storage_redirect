@@ -8,6 +8,10 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v24.1.2 (62) (2021-04-27)
+
+- Fix "Fix app interaction issues" not works on some devices (requires update app to v5.3.2 as well)
+
 ### v24.1.0 (60) (2021-04-08)
 
 - Fix "Fix app interaction issues" not works after upgrading to Riru 25
