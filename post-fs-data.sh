@@ -7,12 +7,12 @@ if [ -f "$MODDIR"/../riru-core/util_functions.sh ]; then
   [ -d "$MODDIR"/system ] && mv "$MODDIR"/system "$MODDIR"/riru
 
   # Remove unnecessary foloder
-  rm -rf /data/misc/riru/modules/storage_redirect
+  rm -rf /data/adb/riru/modules/storage_redirect
 else
   # Riru pre-v24
   # In case user downgrade Riru to pre-v24
   [ -d "$MODDIR"/riru ] && mv "$MODDIR"/riru "$MODDIR"/system
-  mkdir -p /data/misc/riru/modules/storage_redirect
+  mkdir -p /data/adb/riru/modules/storage_redirect
 fi
 
 # Run starter
