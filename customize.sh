@@ -39,6 +39,13 @@ fi
 [ -f "$CONFIG_PATH/.server_version" ] && VERSION=$(cat "$CONFIG_PATH/.server_version") || VERSION=0
 [ "$VERSION" -eq "$VERSION" ] || VERSION=0
 ui_print "- Storage Isolation core service version: $VERSION"
+if [ "$VERSION" -ge 304 ]; then
+  ui_print    "*****************************************"
+  ui_print    "! The module version is too low"
+  ui_print    "! This version of module does not support Storage Isolation to v6.0.0 or above"
+  ui_print    "! Please download the newer version of the module from https://sr.rikka.app"
+  abort "*****************************************"
+fi
 if [ "$VERSION" -lt 295 ]; then
   ui_print    "*****************************************"
   ui_print    "! Storage Isolation app is not installed or the verison too low"
