@@ -8,6 +8,21 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v25.0.8 (71) (2021-06-26)
+
+- "The Media Storage part" works correctly on Android 12
+
+### v25.0.6 (69) (2021-06-26)
+
+- "The Media Storage part" works correctly for 💩 apps using "group by injection" in query
+- File monitor records if the operation is from an isolated app
+
+### v25.0.0 (63) (2021-06-14)
+
+- Apps can no longer use non-accessible folders through Media Storage (before it can't handle the new method added from Android 10)
+- File monitor can record the event of apps use Media Storage
+- Redo "the Media Storage part" from scratch, having much better performance and compatibility than before
+
 ### v24.1.2 (62) (2021-04-27)
 
 - Fix "Fix app interaction issues" not works on some devices (requires update app to v5.3.2 as well)

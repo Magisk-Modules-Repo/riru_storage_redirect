@@ -39,17 +39,10 @@ fi
 [ -f "$CONFIG_PATH/.server_version" ] && VERSION=$(cat "$CONFIG_PATH/.server_version") || VERSION=0
 [ "$VERSION" -eq "$VERSION" ] || VERSION=0
 ui_print "- Storage Isolation core service version: $VERSION"
-if [ "$VERSION" -ge 304 ]; then
+if [ "$VERSION" -lt 304 ]; then
   ui_print    "*****************************************"
-  ui_print    "! The module version is too low"
-  ui_print    "! This version of module does not support Storage Isolation to v6.0.0 or above"
-  ui_print    "! Please download the newer version of the module from https://sr.rikka.app"
-  abort "*****************************************"
-fi
-if [ "$VERSION" -lt 295 ]; then
-  ui_print    "*****************************************"
-  ui_print    "! Storage Isolation app is not installed or the verison too low"
-  ui_print    "! Please upgrade the app to v5.3.0 or above and upgrade core service in the app"
+  ui_print    "! Storage Isolation app is not installed or the version is too low"
+  ui_print    "! Please upgrade the app to v6.0.0 or above and upgrade core service in the app"
   ui_print    "! You can find download link from https://sr.rikka.app"
   abort "*****************************************"
 fi
@@ -89,6 +82,8 @@ if [ "$ARCH" = "x86" ] || [ "$ARCH" = "x64" ]; then
     extract "$ZIPFILE" "lib/x86/starter" "$MODPATH" true
   fi
 fi
+
+extract "$ZIPFILE" 'main.dex' "$MODPATH"
 
 # Riru pre-v24 uses "/system", "/data/adb/riru/modules" is used as the module list
 # If "/data/adb/riru/modules/example" exists, Riru will try to load "/system/lib(64)/libriru_example.so
