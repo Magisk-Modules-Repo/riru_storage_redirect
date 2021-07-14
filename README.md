@@ -8,6 +8,11 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v25.0.9 (72) (2021-07-13)
+
+- File monitor can record if `mkdir` and `creat` operations are successful (Requires app v6.1.3 to display the records)
+- Apps will wait for service restart so that they can be isolated correctly
+
 ### v25.0.8 (71) (2021-06-26)
 
 - "The Media Storage part" works correctly on Android 12

@@ -64,9 +64,9 @@ if [ "$ARCH" = "arm" ] || [ "$ARCH" = "arm64" ]; then
   if [ "$IS64BIT" = true ]; then
     ui_print "- Extracting arm64 libraries"
     extract "$ZIPFILE" "lib/arm64-v8a/libriru_$RIRU_MODULE_ID.so" "$MODPATH/riru/lib64" true
-    extract "$ZIPFILE" "lib/arm64-v8a/starter" "$MODPATH" true
+    extract "$ZIPFILE" "lib/arm64-v8a/libstarter.so" "$MODPATH" true
   else
-    extract "$ZIPFILE" "lib/armeabi-v7a/starter" "$MODPATH" true
+    extract "$ZIPFILE" "lib/armeabi-v7a/libstarter.so" "$MODPATH" true
   fi
 fi
 
@@ -77,11 +77,13 @@ if [ "$ARCH" = "x86" ] || [ "$ARCH" = "x64" ]; then
   if [ "$IS64BIT" = true ]; then
     ui_print "- Extracting x64 libraries"
     extract "$ZIPFILE" "lib/x86_64/libriru_$RIRU_MODULE_ID.so" "$MODPATH/riru/lib64" true
-    extract "$ZIPFILE" "lib/x86_64/starter" "$MODPATH" true
+    extract "$ZIPFILE" "lib/x86_64/libstarter.so" "$MODPATH" true
   else
-    extract "$ZIPFILE" "lib/x86/starter" "$MODPATH" true
+    extract "$ZIPFILE" "lib/x86/libstarter.so" "$MODPATH" true
   fi
 fi
+
+mv "$MODPATH/libstarter.so" "$MODPATH/starter"
 
 extract "$ZIPFILE" 'main.dex' "$MODPATH"
 
