@@ -8,6 +8,10 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v25.1.0 (73) (2021-08-29)
+
+- "Export isolated files" rules is now apply to the old "insert with Media Storage" way
+
 ### v25.0.9 (72) (2021-07-13)
 
 - File monitor can record if `mkdir` and `creat` operations are successful (Requires app v6.1.3 to display the records)
@@ -19,7 +23,7 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ### v25.0.6 (69) (2021-06-26)
 
-- "The Media Storage part" works correctly for 💩 apps using "group by injection" in query
+- "The Media Storage part" works correctly for 💩 apps using "group by" injection in query
 - File monitor records if the operation is from an isolated app
 
 ### v25.0.0 (63) (2021-06-14)

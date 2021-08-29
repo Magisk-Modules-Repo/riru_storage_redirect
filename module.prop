@@ -1,6 +1,6 @@
 id=riru_storage_redirect
 name=Riru - Enhanced mode for Storage Isolation
-version=v25.0.9
-versionCode=72
+version=v25.1.0
+versionCode=73
 author=Rikka
 description=Enable Enhanced mode for Storage Isolation v6.0.0 or above. Storage Isolation is an app that allows you control how apps use your files.
