@@ -8,6 +8,10 @@ You can learn more about Storage Isolation from <https://sr.rikka.app/>.
 
 ## Changelog
 
+### v25.1.1 (74) (2021-09-22)
+
+- Fix insert files with Media Storage to "external_primary" is not handled
+
 ### v25.1.0 (73) (2021-08-29)
 
 - "Export isolated files" rules is now apply to the old "insert with Media Storage" way
